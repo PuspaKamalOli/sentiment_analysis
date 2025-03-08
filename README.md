@@ -58,7 +58,6 @@ streamlit run streamlitUI.py
 - **Evaluation Metrics:** Accuracy, F1 Score
 
 ## API Endpoints
-- **GET `/`** → Health check
 - **POST `/predict`** → Sentiment prediction
 
 **Example Request:**
@@ -80,5 +79,5 @@ The frontend allows users to input text and receive sentiment predictions via th
 
 
 ## Author
-[Puspa Kamal Oli]
+Puspa Kamal Oli
 
