@@ -35,3 +35,6 @@ venv/
 
 # Ignore compiled Cython files
 *.so
+model/checkpoint-*/
+model/*.pt
+model/*.safetensors
