@@ -1,44 +1,46 @@
 import pandas as pd
+import os
 import re
-import string
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
 
-nltk.download('stopwords')
-nltk.download('punkt')
+file_path = './data/Tweets.csv' 
+output_path='./data/preprocessed_data.csv'
 
-# Function to clean text data
-def clean_text(text):
-    text = text.lower()  # Convert text to lowercase
-    text = re.sub(r"http\S+|www\S+|https\S+", '', text, flags=re.MULTILINE)  # Remove URLs
-    text = re.sub(r'\@\w+|\#','', text)  # Remove mentions and hashtags
-    text = text.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
-    text = re.sub(r'\d+', '', text)  # Remove numbers
-    text = text.strip()  # Remove leading and trailing whitespaces
-    return text
+def preprocess_data(file_path, output_path):
+    # Checks if file exists
+    if not os.path.exists(file_path):
+        print(f"Error: The file {file_path} does not exist.")
+        return None
 
-# Function to remove stopwords
-def remove_stopwords(text):
-    stop_words = set(stopwords.words('english'))
-    words = word_tokenize(text)
-    filtered_text = " ".join([word for word in words if word not in stop_words])
-    return filtered_text
-
-# Function to preprocess text
-def preprocess_text(text):
-    text = clean_text(text)
-    text = remove_stopwords(text)
-    return text
-
-# Function to load dataset and preprocess
-def load_and_preprocess_data(file_path):
+    # Load dataset
     df = pd.read_csv(file_path)
-    df.dropna(subset=['text'], inplace=True)  # Drop rows with missing text
-    df['cleaned_text'] = df['text'].apply(preprocess_text)  # Apply preprocessing
-    return df
 
-if __name__ == "__main__":
-    file_path = "data/Tweets.csv"  # Adjust the path accordingly
-    processed_df = load_and_preprocess_data(file_path)
-    print(processed_df.head())
+    # Selects relevant columns and copy
+    df = df[['airline_sentiment', 'text']].copy()
+
+    # Map target sentiment values
+    target_map = {'positive': 1, 'negative': 0, 'neutral': 2}
+    df['target'] = df['airline_sentiment'].map(target_map)
+    
+    def clean_text(text):
+        text = re.sub(r'[^\x00-\x7F]+', '', text)  # Removes emojis
+        text = re.sub(r'[^a-zA-Z0-9\s!?.,]', '', text)  # Keep important punctuation
+        text = re.sub(r'\s+', ' ', text)  # Remove extra spaces
+        return text.strip()
+
+    # Apply the clean_text function to the 'text' column
+    df['text'] = df['text'].apply(clean_text)
+
+    # Filter and rename columns
+    df2 = df[['text', 'target']]
+    df2.columns = ['sentence', 'label']
+
+    # Save the preprocessed data to the 'data' folder
+    df2.to_csv(output_path, index=False)
+    print(f"Preprocessing complete. File saved to '{output_path}'")
+
+    return df2
+
+# Run preprocessing function
+preprocessed_data = preprocess_data(file_path, output_path)
+if preprocessed_data is not None:
+    print("Data preprocessed successfully.")

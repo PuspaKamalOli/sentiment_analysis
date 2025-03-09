@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import warnings        
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
 from datasets import load_dataset
 from transformers import (
@@ -13,6 +14,7 @@ from transformers import (
     TrainingArguments
 )
 
+warnings.filterwarnings('ignore')
 class SentimentModel:
     """
     A class to handle sentiment analysis model training using DistilBERT.
