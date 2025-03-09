@@ -12,4 +12,3 @@ transformers[torch]
 uvicorn
 streamlit
 fastapi
-nltk
