@@ -1,0 +1,37 @@
+# Ignore Python bytecode files
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment
+sentiment/
+venv/
+
+# Ignore data files
+/data/*.csv
+!/data/Tweets.csv  # Keep the raw dataset
+
+# Ignore model checkpoints and outputs
+/model/
+/model/*
+
+# Ignore logs and temp files
+*.log
+*.tmp
+*.DS_Store
+
+# Ignore Streamlit and FastAPI cache
+/.streamlit/
+/.fastapi/
+
+# Ignore environment configuration
+.env
+.env.*
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore VS Code settings
+.vscode/
+
+# Ignore compiled Cython files
+*.so
