@@ -4,7 +4,7 @@
 This project is part of the **Machine Learning Development Assessment** and aims to predict customer sentiment using NLP techniques. The sentiment analysis model is trained on **Tweets.csv**, which contains social media mentions related to airline sentiment.
 
 ## Dataset
-- **Source:** Tweets.csv (Social Media Mentions)
+- **Source:** Tweets.csv (Social Media Mentions)(https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment)
 - **Columns Used:**
   - `airline_sentiment`: Target labels (positive, negative, neutral)
   - `text`: Customer reviews
