@@ -77,7 +77,11 @@ streamlit run streamlitUI.py
 ## Streamlit UI
 The frontend allows users to input text and receive sentiment predictions via the FastAPI backend.
 
+##documenttion
+https://docs.google.com/document/d/136LaySxiC-yt8h0XXo4b0jmS9_htvZ44/edit?usp=drive_link&ouid=111244720786006995641&rtpof=true&sd=true
 
 ## Author
 Puspa Kamal Oli
+
+
 
