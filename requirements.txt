@@ -1,0 +1,14 @@
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+transformers
+datasets
+torch
+torchinfo
+accelerate
+transformers[torch]
+uvicorn
+streamlit
+fastapi
